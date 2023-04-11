@@ -34,3 +34,34 @@ def S(p,n,Pe):
         return s_bar(abs(p),n,Pe)/(2*iota)
     if p<0:
         return -s_bar(abs(p),n,Pe)/(2*iota)
+
+# # # # test c_bar and s_bar
+
+# plt.figure()
+# theta = np.linspace(0,359,1000)
+# n = 5
+
+# plt.plot(theta,sp.mathieu_cem(n,-Pe**2/4,theta)[0],'k',linewidth=2.0)
+# suma = np.zeros(len(theta))
+# for p in np.arange(0,15,1):
+#     suma += c_bar(p,n,Pe)*np.cos(np.pi/180*theta*p)
+# plt.plot(theta,suma,'m:',linewidth=3.0)
+
+# plt.grid()
+# plt.show()
+
+# # # # test C and S
+
+# plt.figure()
+# theta = np.linspace(0,359,1000)
+# n = 2
+
+# plt.plot(theta,sp.mathieu_cem(n,-Pe**2/4,theta)[0],'k',linewidth=2.0)
+# suma = np.zeros(len(theta),dtype=complex)
+# suma += C(0,n,Pe)
+# for p in np.arange(1,25,1):
+#     suma += C(p,n,Pe)*np.exp(iota*p*theta*np.pi/180) + C(-p,n,Pe)*np.exp(-iota*p*theta*np.pi/180)
+# plt.plot(theta,suma.real,'m:',linewidth=3.0)
+
+# plt.grid()
+# plt.show()
