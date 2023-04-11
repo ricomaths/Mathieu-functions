@@ -1,0 +1,36 @@
+def c_bar(p,n,Pe):
+    if n%2==0:
+        if p%2==0:
+            return (-1)**(n/2)*(-1)**(p/2)*sp.mathieu_even_coef(n,Pe**2/4)[int(p/2)]
+        else:
+            return 0
+    else:
+        if p%2==0:
+            return 0
+        else:
+            return (-1)**((n-1)/2)*(-1)**((p-1)/2)*sp.mathieu_odd_coef(n,Pe**2/4)[int((p-1)/2)]
+
+def C(p,n,Pe):
+    if p==0:
+        return c_bar(p,n,Pe)
+    else:
+        return c_bar(abs(p),n,Pe)/2.0
+
+def s_bar(p,n,Pe):
+    if n%2==0:
+        if p%2==0:
+            return (-1)**((n-2)/2)*(-1)**((p-2)/2)*sp.mathieu_odd_coef(n,Pe**2/4)[int((p-2)/2)]
+        else:
+            return 0
+    else:
+        if p%2==0:
+            return 0
+        else:
+            return (-1)**((n-1)/2)*(-1)**((p-1)/2)*sp.mathieu_even_coef(n,Pe**2/4)[int((p-1)/2)]
+        
+def S(p,n,Pe):
+    iota = complex(0,1)
+    if p>0:
+        return s_bar(abs(p),n,Pe)/(2*iota)
+    if p<0:
+        return -s_bar(abs(p),n,Pe)/(2*iota)
