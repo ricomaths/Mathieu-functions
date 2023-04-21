@@ -1,0 +1,84 @@
+import numpy as np
+import scipy.special as sp
+import matplotlib.pyplot as plt
+
+def c(n,l,Pe):
+    if n%2==0:
+        if l%2==0:
+            if l==0:
+                return (-1)**(n/2)*sp.mathieu_even_coef(n,Pe**2/4)[int(abs(l)/2)]
+            else:
+                return ((-1)**((n+abs(l))/2))/2.0*sp.mathieu_even_coef(n,Pe**2/4)[int(abs(l)/2)]
+        else:
+            return 0
+    else:
+        if l%2==0:
+            return 0
+        else:
+            return (-1)**((n+abs(l)-2)/2)*sp.mathieu_odd_coef(n,Pe**2/4)[int((abs(l)-1)/2)]/2
+        
+
+def s(n,l,Pe):
+    iota = complex(0,1)
+    if n*l==0:
+        return 0
+    elif(n%2==0):
+        if (l%2==0):
+            return l/abs(l)*(-1)**((n+abs(l)-4)/2)*sp.mathieu_odd_coef(n,Pe**2/4)[int((abs(l)-1)/2)]/(2*iota)
+        else:
+            return 0
+    else:
+        if (l%2==0):
+            return 0
+        else:
+            return l/abs(l)*(-1)**((n+abs(l)-2)/2)*sp.mathieu_even_coef(n,Pe**2/4)[int((abs(l)-1)/2)]/(2*iota)
+
+
+# # # # check
+
+# suma = 0
+# iota = complex(0,1)
+# theta = np.linspace(0,2*np.pi,1000)
+# n=3
+# Pe=1
+# n_exp = 15
+
+
+# suma_exp = np.zeros(len(theta),dtype=complex)
+# suma_exp = c(n,0,Pe)
+
+# for i in np.arange(1,int((n_exp-1)/2)+1,1):
+#     suma_exp += c(n,-i,Pe)*np.exp(-iota*i*theta)
+#     suma_exp += c(n,i,Pe)*np.exp(iota*i*theta)
+
+
+
+# plt.figure()
+# plt.plot(theta,suma_exp,"r:",linewidth=4.0)
+# plt.plot(theta,sp.mathieu_cem(n,-Pe**2/4,theta*180/np.pi)[0])
+# plt.show()
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+suma = 0
+iota = complex(0,1)
+theta = np.linspace(0,2*np.pi,1000)
+n = 1
+Pe = 1
+n_exp = 15
+
+# print(s(1,1,0))
+
+suma_exp = np.zeros(len(theta),dtype=complex)
+suma_exp = s(n,0,Pe)
+
+for i in np.arange(1,int((n_exp-1)/2)+1,1):
+    suma_exp += s(n,-i,Pe)*np.exp(-iota*i*theta)
+    suma_exp += s(n,i,Pe)*np.exp(iota*i*theta)
+
+
+
+plt.figure()
+plt.plot(theta,suma_exp,"r:",linewidth=4.0)
+plt.plot(theta,sp.mathieu_sem(n,-Pe**2/4,theta*180/np.pi)[0])
+plt.show()
