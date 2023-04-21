@@ -5,4 +5,4 @@ This code contains functions to compute the modified Mathieu functions of the se
 It also contains the separation of variables solution of the steady 2D convection-diffusion problem in polar coordinates when the flow is potential. 
 Of course, the solution is provided in terms of Mathieu functions.
 
-I added a simply code to write the ce and se functions as complex Fourier series
+I added a simple code to write the ce and se functions as complex Fourier series
